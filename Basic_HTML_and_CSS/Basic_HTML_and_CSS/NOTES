@@ -1,0 +1,180 @@
+notes for HTML5 and CSS3 corse
+QUERY STRING
+	key/pairs are written in this format [key]=[pair]
+		ex. firstName=Henry
+	
+	a question mark is used to show where the query string begins and key/value pairs are sparated by an ampersand
+		format is ?[key1]=[value]&[key2]=[value]
+		ex. ?firstName=Harry&lastName=Potter
+		
+http messages important note= GET requests only used to request data, not to create or modify data.
+
+
+PUT and POST
+	POST is used to send data to the server in order to create a resource. The data needed bu the server in order to do the creation is stored in the request body.
+		ex. given URL http://www.exampleschool.com/adminportal/createStudent?studentId=23&firstName=Harry&lastName=Potter
+		the actual HTTP request would look something like this	
+			 POST /adminportal/createOrUpdate_student
+Host: www.exampleschool.com
+Accept-Language: en-us
+
+studentId=23&firstName=Harry&lastName=Potter
+
+PUT is used to replace a resource. in effect this end up editing the resource as the old data about the resource is replaced with the new.
+	request needs to contain the location where the resource should be placed, and any data about the resource.
+		ex. http://www.exampleschool.com/adminportal/editStudent?studentId=23&firstName=James&lastName=Potter
+			would look like
+			PUT /adminportal/createOrUpdate_student
+Host: www.exampleschool.com
+Accept-Language: en-us
+
+studentId=23&firstName=James&lastName=Potter
+;this would result in the name for student 23 being changed from Harry Potter to James Potter
+
+
+
+
+The PUT verb is idempotent. For example: If you wanted to change the GPA of an existing student, you might send an HTTP request that took the data from a form and sent it to a program on the server called “updateStudent”:
+
+PUT /admin/updateStudent HTTP/1.1
+Host: www.exampleschool.com
+studentId=23&GPA=3.74
+
+This would result in the change of the GPA of the student with ID 23 from 3.58, as above, to 3.74.
+
+The POST verb is non-idempotent. If you wanted to create a new student, you might send an HTTP request that took the data from a form and sent it to a program on the server called “createStudent”:
+
+POST /admin/createStudent HTTP/1.1
+Host: www.exampleschool.com
+firstName=John&lastName=Doe
+
+This would result in a new student named John Doe being created on the server.
+
+idempotent= an operation that will produce the same result even if it is performed multiple times.
+
+
+it is valuable for computer programs to know and modify the state of the various resources that the program is concerned with.
+a system was created that can use the HTTP protocol to be used to monitor and control the state of these various resources.
+
+This system is called “RESTful”. “REST” stands for “Representational State Transfer”.
+
+RESTful involves the creation of APIs in an exact manner(Application programming interface)
+		its a set of clearly defined methods of communication between various software components
+***on the web, an API is essentially a description of how one program can use the internet to request certain things from another program. 
+
+
+			An endpoint has a URL, since it’s something that can be identified and accessed over the Internet.
+
+In our weather forecasting example, the URL for an endpoint might look something like this:
+
+http://weatherforecast.com/api/oneday/ZIP/95437
+
+OR
+
+http://weatherforecast.com/api/sevenday/city/Chicago
+	these would have their own APIS
+	
+If you used a browser to access that first API, the HTTP request might look like this:
+
+GET /api/oneday/ZIP/95437
+Host: www.weatherforcast.com
+Accept-Language: en-us
+
+The HTTP response might look like this:
+
+HTTP/1.1 200 OK
+Date: Sat, 25 May 2019 12:38:53 GMT
+
+{
+	“ZIP”: 95437
+	“Date”: “05 25 2019”
+	“High Temperature”: “77F”
+}
+
+RESTful. Here, we create APIs that enable us to access and change the state of various resources using HTTP messages and verbs.
+
+To use this API in the RESTful system, we have to think in this manner: “What resource am I concerned with, and what do I want to do to that resource”.
+
+******In simple terms, we use the HTTP verbs in this fashion:
+
+GET: retrieve information about a specified resource
+
+POST: create a specified resource
+
+PUT: modify a specified resource
+
+DELETE: delete a specified resource
+
+The GET verb is pretty straightforward. Let’s use it in an example where we want to allow other programs to get a list of all students. The URL for that might be:
+
+http://www.exampleschool.com/api/StudentService/Students
+********
+
+!!!in RESTful we identify a resource and use the HTTP verb to indicate what we want to happen with that resource.
+
+	The <form> tag is used to create a form that allows users to input data. 
+		Here is a typical way to write the <form> tag:
+			<form action="" methpd"post"
+				The action attribute specifies where to send form-data when a form is submitted. 
+					The method attribute specifies how to send form-data (while the action attribute gives the page to send the form-data to). The method attribute can contain GET or POST.
+
+Here is the HTML code for creating a basic form:
+	<form action"" method=""
+		First Name: <input type="text" name="First_Name"><br>
+		Last NAme: <input type="text" name="Last-Name"><br>
+		<input type="submit" value="Submit">
+	</form>
+			left the quotation marks after the action attribute blank because we aren’t sending the form data anywhere at this point.
+
+The <input> tag specifies a field where a user can enter data.
+
+The type attribute specifies the type of user input (text, checkbox, password, etc.). In the above code, we use the type attribute “submit”, which creates a submit button
+
+IDE=Integrated Development Enviornment
+	is a set of programming tools for writing software programs
+	
+Another way to add emphasis to text is <em> tag.
+
+
+____---___ Example Tags
+<article> tag = specifies independent, self-contained content.
+			An article should make sense on its own and it should be possible to distribute it independently from the rest of the site.
+					Potential sources for the <article> element:
+					Forum post
+					Blog post
+					News story
+					Comment
+							ex.<article>
+									<h1>Google Chrome</h1>
+									<p>Google Chrome is a free, open-source web browser developed by Google, released in 2008.</p>
+								</article>
+								
+<details> tag =	specifies additional details that the user can view or hide on demand.
+can be used to create an interactive widget that the user can open and close. Any sort of content can be put inside the <details> tag.
+
+The content of a <details> element should not be visible unless the open attribute is set.
+									ex.<details>
+											<summary>Copyright 1999-2018.</summary>
+											<p> - by Refsnes Data. All Rights Reserved.</p>
+											<p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+										</details>
+<TIME> tag ex.
+<p>We open at <time>10:00</time> every morning.</p>
+<p>I have a date on <time datetime="2008-02-14 20:00">Valentines day</time>.</p>
+
+
+
+PNG: Portable Network Graphics. This is a type of image file that allows for compressed size without any loss in image quality.
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
